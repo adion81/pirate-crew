@@ -4,10 +4,11 @@ const express = require('express'),
     cors = require('cors'),
     cookieParser = require('cookie-parser'),
     server = app.listen(port,() => console.log(`Listening on port ${server.address().port}`));
+    
+app.use(cors({credentials:true,origin:'http://localhost:3000'}));
 app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
-app.use(cors({credentials:true,origin:'http://localhost:3000'}));
 
 
 

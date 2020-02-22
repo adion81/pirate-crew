@@ -4,7 +4,7 @@ import Axios from 'axios';
 const Pirates = (props) => {
     const [pirates,setPirates] = useState([]);
     useEffect(() => {
-        Axios.get('http://localhost:8000/api/pirates')
+        Axios.get('http://localhost:8000/api/pirates',{withCredentials:true})
             .then(res => setPirates(res.data))
             .catch(err => console.log(err))
     },[])

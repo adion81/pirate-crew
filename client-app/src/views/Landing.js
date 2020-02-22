@@ -50,7 +50,7 @@ const Landing = (props) => {
     }
     const handleRegisterSubmit = (e) => {
         e.preventDefault();
-        Axios.post('http://localhost:8000/api/register',register)
+        Axios.post('http://localhost:8000/api/register',register,{withCredentials:true})
             .then(res => {
                 console.log(res.data);
                 setRegister({
@@ -81,7 +81,7 @@ const Landing = (props) => {
     }
     const handleLoginSubmit = (e) => {
         e.preventDefault();
-        Axios.post('http://localhost:8000/api/login',login)
+        Axios.post('http://localhost:8000/api/login',login,{withCredentials:true})
             .then(res => {
                 console.log(document.cookie);
                 console.log(res.data)

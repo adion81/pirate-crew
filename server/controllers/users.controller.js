@@ -8,11 +8,7 @@ module.exports = {
     register: (req,res) => {
         const user = new User(req.body);
         user.save()
-            .then( user => res.json({user:{
-                firstName: user.firstName,
-                lastName: user.lastName,
-                email : user.email
-            }}))
+            .then( user => res.cookie("userToken", jwt.sign({id:user._id},secret),{httpOnly:true}).json({msg:"success"}))
             .catch(err => res.status(400).json(err.errors));
     },
     login: (req,res) => {
@@ -28,12 +24,8 @@ module.exports = {
                         .then(isValid => {
 
                             if(isValid === true){
-                                const newJWT = jwt.sign({
-                                    _id: user._id,
-                                },secret,{expiresIn:3600});
-                                console.log(newJWT);
-                                res.cookie("userToken", newJWT,secret,{httpOnly:true}).json({msg:"success"});
-                                res.send('done');
+                                
+                                res.cookie("userToken", jwt.sign({id:user._id},secret),{httpOnly:true}).json({msg:"success"});
                             
                             }
                             else{
